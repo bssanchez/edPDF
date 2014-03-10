@@ -16,8 +16,6 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 //
-if(!defined('s3_entrada') || !s3_entrada) die('No es un punto de entrada valido');
-
 define('FPDI_VERSION', '1.4.4');
 
 // Check for TCPDF and remap TCPDF to FPDF

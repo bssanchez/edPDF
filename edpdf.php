@@ -1,4 +1,16 @@
 <?php
+/**
+ *  edPDF Edicion/Generacion de PDFs con PHP
+ *  Esta clase sirve para generar pdfs limpios y/o a partir de plantillas usando FPDF
+ *
+ *  edPDF version: 0.1
+ *
+ *  @ author: Wilmer Machuca
+ *  @ author: Brandon Sanchez
+ *  @ last-edition: 10/03/2014
+ *
+ */
+
 require_once 'include/fpdf/fpdf.php';
 require_once 'include/fpdi/fpdi.php';
 
@@ -16,7 +28,7 @@ class edPDF extends FPDI {
      * @param Int $pagina => Pagina de la plantilla que desea importar en la nueva pagina del documento
      * @param String $ruta => Ruta en donde se encuentran alojadas las plantillas en el servidor (Default => uploads/plantillas/)
      */
-    public function edPdfAddPage($documento, $pagina = 1, $ruta = 'uploads/plantillas/') {
+    public function edPdfAddPage($documento, $pagina = 1, $ruta = './') {
         $this->AddPage();
         $this->setSourceFile($ruta . $documento);
         $tplIdx = $this->importPage($pagina);
@@ -57,7 +69,7 @@ class edPDF extends FPDI {
      * @param String $a => Alineacion del texto puede usar LCRJ (Siendo L = izquierda, C= centrado, R = derecha, J = texto justificado [por defecto]) 
      * @param String $style => Estilo de la letra puede usar BUI (siendo B => Negrita, U => subrayado, I => Italica)
      * @param Int $font_size => Tamaño de la fuente
-     * @param Boolean
+     * @param Boolean $fc => Si desea poner fondo a la celda
      * @param String $family => Font family
      */
     function insertarCelda($texto, $x, $y, $w, $h, $a = 'J', $style = '', $font_size = 9, $fc = false, $family = 'Arial') {
@@ -95,7 +107,7 @@ class edPDF extends FPDI {
      * @param String $documento => Nombre del documento con Extension (.pdf)
      * @param String $ruta => Ruta de la carpeta que contiene las plantillas (Default = uploads/plantillas/)
      */
-    public function edPdfAddAllPages($documento, $ruta = 'uploads/plantillas/') {
+    public function edPdfAddAllPages($documento, $ruta = './') {
         $cant = $this->setSourceFile($ruta . $documento);
 
         for ($i = 1; $i <= $cant; $i++) {
